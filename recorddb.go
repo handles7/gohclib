@@ -2,9 +2,11 @@ package gohclib
 
 import (
 	"fmt"
-	"gohclib/config"
-	"gohclib/cron"
 	"time"
+
+	"github.com/handles7/gohclib/cron"
+
+	"github.com/handles7/gohclib/config"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
