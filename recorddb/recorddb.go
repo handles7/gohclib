@@ -11,13 +11,18 @@ import (
 )
 
 func RunRecord(siid int) {
-	c := cron.New()
-	c.AddFunc("@every 30s", func() { RecordCenterCron(siid) })
-	c.Start()
+	datasource := config.GetStr("mysqlpath")
+
+	if datasource != "" {
+		c := cron.New()
+		c.AddFunc("@every 30s", func() { RecordCenterCron(siid, datasource) })
+		c.Start()
+	}
+
 }
 
-func RecordCenterCron(siid int) {
-	datasource := config.GetStr("mysqlpath")
+func RecordCenterCron(siid int, datasource string) {
+
 	dbc, err := sqlx.Open("mysql", datasource)
 
 	if err != nil {
