@@ -10,12 +10,23 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-func RunRecord(siid int) {
+func RunRecord(siid int, releasesiid int) {
 	datasource := config.GetStr("mysqlpath")
+	prod := config.GetStr("PROFILE")
+	var sid int
+
+	if prod == "prod" {
+		sid = releasesiid
+	} else {
+		sid = siid
+	}
 
 	if datasource != "" {
 		c := cron.New()
-		c.AddFunc("@every 30s", func() { RecordCenterCron(siid, datasource) })
+		c.AddFunc("@every 30s", func() {
+			RecordCenterCron(sid, datasource)
+
+		})
 		c.Start()
 	}
 
