@@ -1,4 +1,4 @@
-package recorddb
+package main
 
 import (
 	"fmt"
