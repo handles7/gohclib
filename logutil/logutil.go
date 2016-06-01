@@ -14,7 +14,7 @@ var logger = logrus.New()
 type Fields logrus.Fields
 
 func init() {
-	SetLogFormatter(&logrus.JSONFormatter{})
+	SetLogFormatter(&logrus.TextFormatter{FullTimestamp: true})
 }
 
 func SetLogLevel(level logrus.Level) {
