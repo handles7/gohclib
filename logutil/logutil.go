@@ -2,6 +2,7 @@ package logutil
 
 import (
 	"fmt"
+	"os"
 	"runtime"
 	"strings"
 
@@ -14,6 +15,7 @@ var logger = logrus.New()
 type Fields logrus.Fields
 
 func init() {
+	logger.Out = os.Stdout
 	SetLogFormatter(&logrus.TextFormatter{FullTimestamp: true})
 }
 
